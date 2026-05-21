@@ -234,8 +234,8 @@ One row per experiment combination, with the following columns:
 |--------|-------------|
 | `model`, `range`, `dtype`, `lookback`, `task` | Experiment dimensions |
 | `n_samples` | Number of evaluated samples |
-| `accuracy` | Fraction where `model_prediction` is correct (strict) |
-| `accuracy@any` | Fraction where any answer in the output is correct (lenient) |
+| `FAA` | Fraction where `model_prediction` is correct (strict) |
+| `CAA` | Fraction where any answer in the output is correct (lenient) |
 | `answered_rate` | Fraction of samples where the model produced any numeric answer |
 | `avg_out_tokens` | Mean number of generated tokens |
 | `avg_steps_pred` | Mean number of reasoning steps written |

@@ -336,7 +336,7 @@ def run_experiment_with_engine(
             pass
         if start_idx >= len(df):
             acc = pd.DataFrame(results)["correct"].mean() if results else float("nan")
-            print(f"    [DONE] Already complete. Accuracy={acc:.4f}")
+            print(f"    [DONE] Already complete. FAA={acc:.4f}")
             return acc
 
     remaining_df = df.iloc[start_idx:].reset_index(drop=True)
@@ -393,7 +393,7 @@ def run_experiment_with_engine(
         pd.DataFrame(results).to_json(output_path, orient="records", lines=True)
 
     acc = pd.DataFrame(results)["correct"].mean()
-    print(f"    Accuracy = {acc:.4f}  ({len(results)} samples)")
+    print(f"    FAA = {acc:.4f}  ({len(results)} samples)")
     return acc
 
 
@@ -420,8 +420,8 @@ def generate_summary(results_root: str, model_tag: str):
                 "lookback":       lookback_,
                 "task":           task_,
                 "n_samples":      len(df),
-                "accuracy":       round(df["correct"].mean(), 4),
-                "accuracy@any":   round(df["correct@any"].mean(), 4) if "correct@any" in df else float("nan"),
+                "FAA":            round(df["correct"].mean(), 4),
+                "CAA":        round(df["correct@any"].mean(), 4) if "correct@any" in df else float("nan"),
                 # extra aggregates available because we now store these columns
                 "answered_rate":  round(df["answered"].mean(), 4) if "answered" in df else float("nan"),
                 "avg_out_tokens": round(df["output_tokens"].mean(), 1) if "output_tokens" in df else float("nan"),
@@ -624,7 +624,7 @@ def main():
                 all_accs[f"{range_}|{dtype_}|{lookback_}|{task_}"] = acc
 
         if all_accs:
-            print(f"\nAll experiments complete. Mean accuracy: {np.mean(list(all_accs.values())):.4f}\n")
+            print(f"\nAll experiments complete. Mean FAA: {np.mean(list(all_accs.values())):.4f}\n")
 
     # ── Summary CSV ──
     print("Generating summary CSV...")
