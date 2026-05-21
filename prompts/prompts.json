@@ -1,0 +1,16 @@
+{
+  "base": "You are a deterministic procedure executor.\n\nYou will be given:\n1. A procedure (step-by-step instructions)\n2. Input values\n\nYour task is to simulate the procedure exactly as written.\n\nExecution rules:\n- Execute each step sequentially, without skipping or reordering.\n- Maintain exact intermediate state.\n- Do not reinterpret or optimize steps.\n\nBehavior:\n{behavior}\n\nOutput rules:\n{output_rules}\n\nProcedure:\n{algo}\n\nInputs:\nx = {x}, y = {y}",
+
+  "modes": {
+    "no_reasoning": {
+      "behavior": "Do not reveal intermediate computations.\nThink internally but only output the final answer.",
+      "output_rules": "- Return ONLY the final result.\n- Do NOT show any steps or reasoning.\n- That line must be in the format: <answer>FINAL_RESULT</answer>\n- Do not include any additional text before or after these tags.\n-Do not use phrases like “The final result is”.\n-The output must contain only the tagged answer.\n- Example (correct):\n<answer>42</answer>\n\nExample (incorrect):\nThe final result is <answer>42</answer>\nAnswer: 42"
+    },
+
+    "reasoning": {
+      "behavior": "Show step-by-step execution.\nInclude intermediate variable values after each step.",
+      "output_rules": "- Show all intermediate steps clearly.\n- Use the same variable names as in the procedure (S1, S2, etc.).\n- That line must be in the format: <answer>FINAL_RESULT</answer>.\n- Do not include any additional text before or after these tags.\n-Do not use phrases like “The final result is”.\n-The output must contain only the tagged answer.\n- Example (correct):\n<answer>42</answer>\n\nExample (incorrect):\nThe final result is <answer>42</answer>\nAnswer: 42"
+    }
+  }
+}
+
